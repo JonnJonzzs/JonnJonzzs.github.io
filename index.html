@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jose Johnson — Cybersecurity</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #1d2021;
+    --bg-soft:   #282828;
+    --border:    #3c3836;
+    --border-hi: #504945;
+    --fg:        #ebdbb2;
+    --fg-dim:    #a89984;
+    --fg-faint:  #7c6f64;
+    --yellow:    #d8a657;
+    --green:     #a9b665;
+    --blue:      #7daea3;
+    --aqua:      #89b482;
+    --radius:    6px;
+  }
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(29,32,33,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 760px; margin: 0 auto; padding: 0 24px;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-weight: 600; font-size: 15px; }
+  .nav-logo span { color: var(--yellow); }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a { font-size: 13px; color: var(--fg-dim); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--fg); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--fg-faint); margin-bottom: 12px; }
+  h1 { font-size: 34px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
+  h2 {
+    font-size: 19px; font-weight: 600; letter-spacing: -0.01em;
+    margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+  }
+  h2::before { content: ''; width: 3px; height: 16px; background: var(--yellow); border-radius: 2px; }
+
+  #hero { padding: 96px 0 64px; border-bottom: 1px solid var(--border); }
+  .hero-tagline { font-size: 16px; color: var(--blue); margin-bottom: 16px; }
+  .hero-bio { color: var(--fg-dim); max-width: 560px; margin-bottom: 28px; }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 500; padding: 8px 16px;
+    border-radius: var(--radius); border: 1px solid var(--border-hi);
+    color: var(--fg); background: var(--bg-soft);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn:hover { border-color: var(--fg-faint); }
+  .btn-accent { background: var(--yellow); color: #1d2021; border-color: var(--yellow); font-weight: 600; }
+  .btn-accent:hover { background: #e3b563; border-color: #e3b563; }
+
+  .about-body { color: var(--fg-dim); margin-bottom: 28px; }
+  .about-body p { margin-bottom: 12px; }
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .meta-cell { background: var(--bg-soft); padding: 14px 16px; }
+  .meta-key { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-faint); margin-bottom: 4px; }
+  .meta-val { font-size: 14px; color: var(--aqua); }
+
+  .repo-list { display: flex; flex-direction: column; gap: 12px; }
+  .repo {
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 20px; background: var(--bg-soft); transition: border-color 0.15s;
+  }
+  .repo:hover { border-color: var(--border-hi); }
+  .repo-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .repo-name { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: var(--blue); }
+  .repo-links { display: flex; gap: 14px; }
+  .repo-links a { font-size: 12px; color: var(--fg-faint); transition: color 0.15s; }
+  .repo-links a:hover { color: var(--yellow); }
+  .repo-desc { font-size: 13px; color: var(--fg-dim); margin-bottom: 14px; }
+  .repo-foot { display: flex; align-items: center; gap: 14px; font-size: 12px; color: var(--fg-faint); flex-wrap: wrap; }
+  .tagm {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    padding: 2px 8px; border: 1px solid var(--border-hi);
+    border-radius: 999px; color: var(--fg-dim);
+  }
+
+  .skill-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 28px; }
+  .skill-col h3 { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: var(--fg-faint); margin-bottom: 12px; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { font-size: 12px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--fg-dim); background: var(--bg-soft); }
+
+  .timeline { display: flex; flex-direction: column; gap: 4px; }
+  .tl-group-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--fg-faint); margin: 20px 0 14px; }
+  .tl-group-title:first-child { margin-top: 0; }
+  .tl-item {
+    display: grid; grid-template-columns: 1fr auto; gap: 2px 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-role { font-size: 14px; font-weight: 600; }
+  .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--fg-faint); text-align: right; white-space: nowrap; }
+  .tl-org { font-size: 13px; color: var(--blue); }
+  .tl-points { grid-column: 1 / -1; list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .tl-points li { font-size: 13px; color: var(--fg-dim); padding-left: 16px; position: relative; }
+  .tl-points li::before { content: '–'; position: absolute; left: 0; color: var(--fg-faint); }
+
+  .contact-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+  .contact-text { font-size: 14px; color: var(--fg-dim); margin-bottom: 20px; }
+  .links-stack { display: flex; flex-direction: column; gap: 2px; }
+  .link-row {
+    display: flex; align-items: center; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid var(--border); font-size: 13px;
+    color: var(--fg-dim); transition: color 0.15s;
+  }
+  .link-row:last-child { border-bottom: none; }
+  .link-row:hover { color: var(--yellow); }
+  .link-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-faint); width: 64px; }
+  .form { display: flex; flex-direction: column; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-faint); }
+  .field input, .field textarea {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 9px 12px; color: var(--fg);
+    font-family: 'Inter', sans-serif; font-size: 13px; outline: none;
+    resize: vertical; transition: border-color 0.15s;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--yellow); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--fg-faint); }
+
+  footer {
+    max-width: 760px; margin: 0 auto; padding: 28px 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--fg-faint); display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .rise { animation: rise 0.5s ease both; }
+  .r1{animation-delay:.05s}.r2{animation-delay:.15s}.r3{animation-delay:.25s}.r4{animation-delay:.35s}
+
+  @media (max-width: 600px) {
+    .contact-flex { grid-template-columns: 1fr; gap: 24px; }
+    .nav-links { gap: 14px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">jose<span>.sec</span></a>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#resume">resume</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <section id="hero">
+    <p class="eyebrow rise r1">~ whoami</p>
+    <h1 class="rise r2">Jose Johnson</h1>
+    <p class="hero-tagline rise r2">Cybersecurity Student · Aspiring Security Engineer</p>
+    <p class="hero-bio rise r3">
+      Cybersecurity student at George Mason University with a hands-on home
+      lab background — IDS/IPS, network monitoring, digital forensics, and
+      Linux systems. I learn by building, breaking, and documenting.
+    </p>
+    <div class="hero-actions rise r4">
+      <a href="#projects" class="btn btn-accent">View lab projects</a>
+      <a href="https://github.com/JonnJonzzs" target="_blank" class="btn">GitHub</a>
+      <a href="#contact" class="btn">LinkedIn</a>
+      <a href="resume.pdf" download class="btn">Résumé</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="about-body">
+      <p>
+        I'm a cybersecurity student based in Alexandria, VA, pursuing a
+        Bachelor of Applied Science in Cybersecurity at George Mason
+        University (expected December 2026), after completing an A.A.S. in
+        Cybersecurity at Northern Virginia Community College.
+      </p>
+      <p>
+        Most of my practical experience comes from a personal home lab where
+        I build and break things on purpose — intrusion detection systems,
+        self-hosted infrastructure, forensic analysis, and a rotating set of
+        Linux environments. I document what I learn so it's repeatable.
+      </p>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-key">location</div><div class="meta-val">Alexandria, VA</div></div>
+      <div class="meta-cell"><div class="meta-key">focus</div><div class="meta-val">Security / Blue Team</div></div>
+      <div class="meta-cell"><div class="meta-key">graduating</div><div class="meta-val">Dec 2026</div></div>
+      <div class="meta-cell"><div class="meta-key">status</div><div class="meta-val">Open to internships</div></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="repo-list">
+
+      <div class="repo">
+        <div class="repo-head">
+          <span class="repo-name">raspberry-pi-nextcloud</span>
+          <div class="repo-links"><a href="https://github.com/JonnJonzzs" target="_blank">writeup</a></div>
+        </div>
+        <p class="repo-desc">Self-hosted Nextcloud file-sync server on a Raspberry Pi, restricted to LAN-only access. Covers hardening, network segmentation, and backup strategy.</p>
+        <div class="repo-foot">
+          <span class="tagm">Linux</span><span class="tagm">Self-hosting</span><span class="tagm">Networking</span>
+        </div>
+      </div>
+
+      <div class="repo">
+        <div class="repo-head">
+          <span class="repo-name">ids-ips-lab</span>
+          <div class="repo-links"><a href="https://github.com/JonnJonzzs" target="_blank">writeup</a></div>
+        </div>
+        <p class="repo-desc">Designed and configured intrusion detection/prevention labs for traffic interception and monitoring — packet capture, signature tuning, and alert analysis.</p>
+        <div class="repo-foot">
+          <span class="tagm">IDS/IPS</span><span class="tagm">Traffic analysis</span><span class="tagm">Blue team</span>
+        </div>
+      </div>
+
+      <div class="repo">
+        <div class="repo-head">
+          <span class="repo-name">forensics-e3-analysis</span>
+          <div class="repo-links"><a href="https://github.com/JonnJonzzs" target="_blank">writeup</a></div>
+        </div>
+        <p class="repo-desc">Digital forensic analysis exercises using E3 forensic software and hard-drive imaging — evidence acquisition, artifact recovery, and reporting.</p>
+        <div class="repo-foot">
+          <span class="tagm">Forensics</span><span class="tagm">E3</span><span class="tagm">Incident response</span>
+        </div>
+      </div>
+
+      <div class="repo">
+        <div class="repo-head">
+          <span class="repo-name">linux-lab-environments</span>
+          <div class="repo-links"><a href="https://github.com/JonnJonzzs" target="_blank">writeup</a></div>
+        </div>
+        <p class="repo-desc">Custom-configured Arch, Kali, Fedora, and Ubuntu environments with security tooling — a flexible testbed for offensive and defensive practice.</p>
+        <div class="repo-foot">
+          <span class="tagm">Arch</span><span class="tagm">Kali</span><span class="tagm">Fedora</span><span class="tagm">Ubuntu</span>
+        </div>
+      </div>
+
+      <div class="repo">
+        <div class="repo-head">
+          <span class="repo-name">rogue-ap-lab</span>
+          <div class="repo-links"><a href="https://github.com/JonnJonzzs" target="_blank">writeup</a></div>
+        </div>
+        <p class="repo-desc">Rogue access point and wireless attack lab for understanding evil-twin attacks, detection, and client-side defenses in a controlled environment.</p>
+        <div class="repo-foot">
+          <span class="tagm">Wireless</span><span class="tagm">Offensive</span><span class="tagm">Detection</span>
+        </div>
+      </div>
+
+      <div class="repo">
+        <div class="repo-head">
+          <span class="repo-name">malware-analysis-lab</span>
+          <div class="repo-links"><a href="https://github.com/JonnJonzzs" target="_blank">writeup</a></div>
+        </div>
+        <p class="repo-desc">Isolated VM-based malware analysis sandbox for safe static and dynamic analysis of samples — behavior monitoring and IOC extraction.</p>
+        <div class="repo-foot">
+          <span class="tagm">Malware</span><span class="tagm">VM isolation</span><span class="tagm">Analysis</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h3>// security</h3>
+        <div class="chip-row">
+          <span class="chip">IDS/IPS</span><span class="chip">Network analysis</span><span class="chip">Digital forensics</span><span class="chip">System security</span><span class="chip">Network admin</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>// systems</h3>
+        <div class="chip-row">
+          <span class="chip">Arch Linux</span><span class="chip">Kali</span><span class="chip">Fedora</span><span class="chip">Ubuntu</span><span class="chip">Windows</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>// scripting</h3>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">Bash</span><span class="chip">C++</span><span class="chip">Lua</span><span class="chip">PowerShell</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>// tools</h3>
+        <div class="chip-row">
+          <span class="chip">VirtualBox</span><span class="chip">VMware</span><span class="chip">E3 Forensic</span><span class="chip">Obsidian</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>// languages</h3>
+        <div class="chip-row">
+          <span class="chip">English</span><span class="chip">Spanish (fluent)</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>// other</h3>
+        <div class="chip-row">
+          <span class="chip">Troubleshooting</span><span class="chip">Documentation</span><span class="chip">72+ WPM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume">
+    <h2>Resume</h2>
+    <div class="timeline">
+      <p class="tl-group-title">// education</p>
+      <div class="tl-item">
+        <span class="tl-role">B.A.S. Cybersecurity</span>
+        <span class="tl-date">Expected Dec 2026</span>
+        <span class="tl-org">George Mason University · Fairfax, VA</span>
+        <ul class="tl-points">
+          <li>Transferred from NOVA (A.A.S. Cybersecurity, May 2024)</li>
+          <li>Coursework: network administration, system security, forensic labs</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <span class="tl-role">A.A.S. Cybersecurity</span>
+        <span class="tl-date">May 2024</span>
+        <span class="tl-org">Northern Virginia Community College</span>
+      </div>
+
+      <p class="tl-group-title">// projects & experience</p>
+      <div class="tl-item">
+        <span class="tl-role">Cybersecurity Home Lab</span>
+        <span class="tl-date">2023 — Present</span>
+        <span class="tl-org">Independent</span>
+        <ul class="tl-points">
+          <li>Built a Raspberry Pi Nextcloud server with LAN-only access</li>
+          <li>Designed IDS/IPS labs for traffic interception and monitoring</li>
+          <li>Practiced forensic analysis using E3 forensic software</li>
+          <li>Configured Arch, Kali, Fedora, and Ubuntu security environments</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <span class="tl-role">Student Research & Coursework</span>
+        <span class="tl-date">2022 — Present</span>
+        <span class="tl-org">Academic</span>
+        <ul class="tl-points">
+          <li>Network administration, system security, and hard-drive forensic labs</li>
+        </ul>
+      </div>
+
+      <p class="tl-group-title">// extracurricular</p>
+      <div class="tl-item">
+        <span class="tl-role">Cybersecurity Club · Digital Law Club</span>
+        <span class="tl-date">2025 — Present</span>
+        <span class="tl-org">George Mason University</span>
+      </div>
+    </div>
+    <a href="resume.pdf" download class="btn" style="margin-top:24px;">⬇ Download résumé (PDF)</a>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-flex">
+      <div>
+        <p class="contact-text">
+          Open to cybersecurity internships, entry-level roles, and
+          collaboration on security projects. I usually reply within a day.
+        </p>
+        <div class="links-stack">
+          <a href="mailto:jjohn212@gmu.edu" class="link-row"><span class="link-tag">email</span>jjohn212@gmu.edu</a>
+          <a href="https://github.com/JonnJonzzs" target="_blank" class="link-row"><span class="link-tag">github</span>/JonnJonzzs</a>
+          <a href="#" class="link-row"><span class="link-tag">linkedin</span>add your URL</a>
+        </div>
+      </div>
+      <form class="form" onsubmit="handleSend(event)">
+        <div class="field"><label for="n">name</label><input id="n" type="text" placeholder="Jane Doe" /></div>
+        <div class="field"><label for="em">email</label><input id="em" type="email" placeholder="jane@example.com" /></div>
+        <div class="field"><label for="m">message</label><textarea id="m" rows="4" placeholder="Hi Jose…"></textarea></div>
+        <button type="submit" class="btn btn-accent" style="align-self:flex-start;">Send</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2025 Jose Johnson</span>
+  <span>built with gruvbox</span>
+</footer>
+
+<script>
+  function handleSend(e) {
+    e.preventDefault();
+    const n = document.getElementById('n').value.trim();
+    const em = document.getElementById('em').value.trim();
+    const m = document.getElementById('m').value.trim();
+    if (!n || !em || !m) { alert('Please fill out all fields.'); return; }
+    alert('Thanks ' + n + '! Wire this up to Formspree or EmailJS to receive real messages.');
+  }
+</script>
+
+</body>
+</html>
