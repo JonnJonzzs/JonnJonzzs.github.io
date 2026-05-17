@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>JonnJonzz — Cybersecurity</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
 
   /* ─────────────────────────────────────
@@ -22,8 +22,8 @@
     --white:   #f4f0ea;
     --col: 720px;
     --gutter: 48px;
-    --serif: 'Playfair Display', Georgia, serif;
-    --mono:  'Space Mono', monospace;
+    --serif: 'IBM Plex Serif', Georgia, serif;
+    --mono:  'IBM Plex Mono', monospace;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -142,6 +142,17 @@
     font-weight: 400;
     color: var(--smoke);
     animation-delay: 0.5s;
+  }
+
+  /* mission statement */
+  .hero-mission {
+    font-family: var(--serif);
+    font-size: 24px; font-style: italic;
+    color: var(--silver);
+    text-align: center;
+    margin: 28px 0 40px;
+    line-height: 1.6;
+    animation: fade-in 1s ease 0.5s both;
   }
 
   /* thin rule between name and details */
@@ -546,10 +557,7 @@
       <span>Alexandria, VA — Open to Internships</span>
     </div>
 
-    <!--<div class="hero-display">
-      <span class="hero-display-name">Jose</span>
-      <span class="hero-display-name italic">Johnson.</span>
-    </div> -->
+    <p class="hero-mission">Expertise through practice, along with theory.</p>
 
     <hr class="hero-rule">
 
@@ -569,7 +577,6 @@
           <a href="#projects" class="arch-link primary">View Projects</a>
           <a href="https://github.com/JonnJonzzs" target="_blank" class="arch-link">GitHub</a>
           <a href="#contact" class="arch-link">Contact</a>
-          <a href="resume.pdf" download class="arch-link">Resume</a>
         </div>
       </div>
     </div>
@@ -643,7 +650,7 @@
                 <span class="project-tag">Networking</span>
               </div>
             </div>
-            <a href="https://github.com/JonnJonzzs" target="_blank" class="project-writeup">Writeup →</a>
+            <a href="#" class="project-writeup">Writeup →</a>
           </div>
 
           <div class="project-row">
@@ -657,7 +664,7 @@
                 <span class="project-tag">Blue Team</span>
               </div>
             </div>
-            <a href="https://github.com/JonnJonzzs" target="_blank" class="project-writeup">Writeup →</a>
+            <a href="#" class="project-writeup">Writeup →</a>
           </div>
 
           <div class="project-row">
@@ -671,7 +678,7 @@
                 <span class="project-tag">Incident Response</span>
               </div>
             </div>
-            <a href="https://github.com/JonnJonzzs" target="_blank" class="project-writeup">Writeup →</a>
+            <a href="#" class="project-writeup">Writeup →</a>
           </div>
 
           <div class="project-row">
@@ -686,7 +693,7 @@
                 <span class="project-tag">Ubuntu</span>
               </div>
             </div>
-            <a href="https://github.com/JonnJonzzs" target="_blank" class="project-writeup">Writeup →</a>
+            <a href="#" class="project-writeup">Writeup →</a>
           </div>
 
           <div class="project-row">
@@ -700,7 +707,7 @@
                 <span class="project-tag">Detection</span>
               </div>
             </div>
-            <a href="https://github.com/JonnJonzzs" target="_blank" class="project-writeup">Writeup →</a>
+            <a href="#" class="project-writeup">Writeup →</a>
           </div>
 
           <div class="project-row">
@@ -714,7 +721,7 @@
                 <span class="project-tag">Analysis</span>
               </div>
             </div>
-            <a href="https://github.com/JonnJonzzs" target="_blank" class="project-writeup">Writeup →</a>
+            <a href="#" class="project-writeup">Writeup →</a>
           </div>
 
         </div>
@@ -768,6 +775,8 @@
             <div class="skill-cell-items">
               <span class="skill-cell-item">VirtualBox · VMware</span>
               <span class="skill-cell-item">E3 Forensic</span>
+              <span class="skill-cell-item">Autopsy</span>
+              <span class="skill-cell-item">FTK · FTK Imager</span>
               <span class="skill-cell-item">Proxmox</span>
               <span class="skill-cell-item">Obsidian</span>
             </div>
@@ -856,10 +865,6 @@
             </div>
           </div>
         </div>
-
-        <a href="resume.pdf" download class="dl-link reveal reveal-delay-3">
-          ↓ &nbsp;Download Résumé PDF
-        </a>
 
       </div>
     </div>
